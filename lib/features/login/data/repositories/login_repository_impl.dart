@@ -35,23 +35,6 @@ class LoginRepositoryImpl implements LoginRepository {
   }
 
   @override
-  Future<Either<AppException, AuthResponseEntity>> readLocalAuthData(
-    AuthResponseEntity data,
-  ) async {
-    try {
-      final userData = await localDataSource.readAuthData();
-
-      return Right(userData);
-    } on InternetConnectionException catch (e) {
-      return Left(e);
-    } on ServerException catch (e) {
-      return Left(e);
-    } on DefaultAppException catch (e) {
-      return Left(e);
-    }
-  }
-
-  @override
   Future<Either<AppException, Unit>> writeLocalAuthData(
     AuthResponseEntity data,
   ) async {

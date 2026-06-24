@@ -11,7 +11,4 @@ abstract class LoginRepository {
   Future<Either<AppException, Unit>> writeLocalAuthData(
     AuthResponseEntity data,
   );
-  Future<Either<AppException, AuthResponseEntity>> readLocalAuthData(
-    AuthResponseEntity data,
-  );
 }

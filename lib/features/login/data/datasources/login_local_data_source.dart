@@ -8,7 +8,6 @@ import 'package:test_ia/features/login/domain/entities/auth_response_entity.dart
 
 abstract class LoginLocalDataSource {
   Future<void> writeAuthData(AuthResponseEntity data);
-  Future<AuthResponseEntity> readAuthData();
 }
 
 @LazySingleton(as: LoginLocalDataSource)
@@ -24,16 +23,6 @@ class LoginLocalDataSourceImpl implements LoginLocalDataSource {
         SecureStorageKeys.authData,
         jsonEncode(data.toJson()),
       );
-    } catch (e) {
-      throw DefaultAppException();
-    }
-  }
-
-  @override
-  Future<AuthResponseEntity> readAuthData() async {
-    try {
-      final result = await secureStorageService.get(SecureStorageKeys.authData);
-      return AuthResponseEntity.fromJson(jsonDecode(result as String));
     } catch (e) {
       throw DefaultAppException();
     }
