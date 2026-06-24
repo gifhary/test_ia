@@ -1,4 +1,7 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_ia/core/theme/pallet.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,14 +19,14 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF6A1B9A), // Deep Purple
-              Color(0xFF8E24AA), // Medium Purple
-              Color(0xFFD81B60), // Vibrant Pink
+              Pallet.deepPurple,
+              Pallet.mediumPurple,
+              Pallet.vibrantPink,
             ],
           ),
         ),
@@ -36,25 +39,25 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   // App Logo / Icon
                   Container(
-                    height: 100,
-                    width: 100,
+                    height: 100.h,
+                    width: 100.w,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.blur_on_rounded,
-                      size: 60,
+                      size: 60.sp,
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
 
                   // Welcome Text
-                  const Text(
+                  Text(
                     "Welcome Back",
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 32.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       letterSpacing: 1.2,
@@ -64,22 +67,22 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "Login to your account to continue",
                     style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white.withOpacity(0.8),
+                      fontSize: 16.sp,
+                      color: Colors.white.withValues(alpha: 0.8),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  SizedBox(height: 40.h),
 
                   // Login Card
                   Container(
-                    padding: const EdgeInsets.all(24.0),
+                    padding: EdgeInsets.all(24.0.w),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
-                      borderRadius: BorderRadius.circular(28),
+                      color: Colors.white.withValues(alpha: 0.9),
+                      borderRadius: BorderRadius.circular(28.r),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 20,
+                          color: Colors.black.withValues(alpha: 0.1),
+                          blurRadius: 20.r,
                           offset: const Offset(0, 10),
                         ),
                       ],
@@ -96,25 +99,21 @@ class _LoginPageState extends State<LoginPage> {
                               labelText: "Email Address",
                               prefixIcon: const Icon(Icons.email_outlined),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(16.r),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(16.r),
                                 borderSide: BorderSide(
                                   color: Colors.grey.shade300,
                                 ),
                               ),
                             ),
-                            validator: (value) {
-                              if (value == null ||
-                                  value.isEmpty ||
-                                  !value.contains('@')) {
-                                return 'Please enter a valid email';
-                              }
-                              return null;
-                            },
+                            validator: (value) =>
+                                EmailValidator.validate(value ?? '')
+                                ? null
+                                : 'Please enter a valid email',
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20.h),
 
                           // Password Field
                           TextFormField(
@@ -135,10 +134,10 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                               ),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(16.r),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(16.r),
                                 borderSide: BorderSide(
                                   color: Colors.grey.shade300,
                                 ),
@@ -152,21 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
 
-                          // Forgot Password
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                "Forgot Password?",
-                                style: TextStyle(
-                                  color: Color(0xFF8E24AA),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 20.h),
 
                           // Login Button
                           ElevatedButton(
@@ -183,16 +168,16 @@ class _LoginPageState extends State<LoginPage> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF6A1B9A),
                               foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              padding: EdgeInsets.symmetric(vertical: 16.h),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(16.r),
                               ),
                               elevation: 2,
                             ),
-                            child: const Text(
+                            child: Text(
                               "LOGIN",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 1.5,
                               ),
@@ -201,29 +186,6 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 30),
-
-                  // Register Link
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Don't have an account? ",
-                        style: TextStyle(color: Colors.white70),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: const Text(
-                          "Sign Up",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
