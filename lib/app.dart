@@ -11,7 +11,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      //TODO set value based on what the design sizes
       designSize: const Size(360, 800),
       builder: (context, child) => MaterialApp.router(
         debugShowCheckedModeBanner: Env.showDebugInfo,
