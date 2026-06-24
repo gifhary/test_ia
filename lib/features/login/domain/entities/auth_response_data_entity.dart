@@ -4,7 +4,7 @@ part 'auth_response_data_entity.freezed.dart';
 part 'auth_response_data_entity.g.dart';
 
 @freezed
-class AuthResponseDataEntity with _$AuthResponseDataEntity {
+abstract class AuthResponseDataEntity with _$AuthResponseDataEntity {
   const factory AuthResponseDataEntity({
     required String accessToken,
     required String tokenType,

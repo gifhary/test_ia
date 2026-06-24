@@ -6,7 +6,7 @@ part 'auth_response_entity.freezed.dart';
 part 'auth_response_entity.g.dart';
 
 @freezed
-class AuthResponseEntity with _$AuthResponseEntity {
+abstract class AuthResponseEntity with _$AuthResponseEntity {
   const factory AuthResponseEntity({
     required AuthResponseStatus status,
     required AuthResponseDataEntity data,
