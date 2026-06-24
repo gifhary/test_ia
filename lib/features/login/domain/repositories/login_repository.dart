@@ -7,4 +7,11 @@ abstract class LoginRepository {
     required String email,
     required String password,
   });
+
+  Future<Either<AppException, Unit>> writeLocalAuthData(
+    AuthResponseEntity data,
+  );
+  Future<Either<AppException, AuthResponseEntity>> readLocalAuthData(
+    AuthResponseEntity data,
+  );
 }

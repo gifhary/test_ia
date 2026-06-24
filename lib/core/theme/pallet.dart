@@ -6,4 +6,6 @@ class Pallet {
   static Color get mediumPurple => const Color(0xFF8E24AA);
 
   static Color get vibrantPink => const Color(0xFFD81B60);
+
+  static Color get white => const Color(0xFFFFFFFF);
 }
