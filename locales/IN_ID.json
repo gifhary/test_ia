@@ -1,0 +1,10 @@
+{
+  "main": {
+    "example": "Contoh"
+  },
+  "appException": {
+    "defaultException": "Kesalahan terjadi",
+    "internetConnectionException": "Tidak ada koneksi internet",
+    "serverException": "Masalah server terjadi"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "main": {
+    "example": "Example"
+  },
+  "appException": {
+    "defaultException": "An error occurred",
+    "internetConnectionException": "No internet connection",
+    "serverException": "Server error occurred"
+  }
+}

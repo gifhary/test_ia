@@ -1,0 +1,10 @@
+{
+  "main": {
+    "example": "example"
+  },
+  "appException": {
+    "defaultException": "",
+    "internetConnectionException": "",
+    "serverException": ""
+  }
+}
