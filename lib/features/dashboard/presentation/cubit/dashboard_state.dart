@@ -7,6 +7,11 @@ class DashboardState with _$DashboardState {
   const factory DashboardState.success({
     required List<RickAndMortyCharacter> pageItem,
   }) = DashboardSuccess;
+  const factory DashboardState.successDelete({required int id}) =
+      DashboardSuccessDelete;
+  const factory DashboardState.successUpdate({
+    required RickAndMortyCharacter char,
+  }) = DashboardSuccessUpdate;
   const factory DashboardState.error({required AppException error}) =
       DashboardError;
 }

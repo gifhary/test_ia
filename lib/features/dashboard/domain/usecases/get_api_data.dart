@@ -13,6 +13,16 @@ class GetApiData {
   Future<Either<AppException, ApiResponseModel>> call([int? page]) async {
     final result = await dashboardRepository.getApiData(page);
 
-    return result.fold((error) => Left(error), (data) => Right(data));
+    return result.fold((error) => Left(error), (data) async {
+      final writeLocal = await dashboardRepository.putCharactersLocally(
+        data.results,
+      );
+
+      return writeLocal.fold(
+        (error) =>
+            Left(DefaultAppException(message: 'Failed to write data locally')),
+        (_) => Right(data),
+      );
+    });
   }
 }

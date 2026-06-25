@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:test_ia/core/theme/pallet.dart';
 import 'package:test_ia/features/dashboard/data/models/rick_and_morty_character.dart';
 import 'package:test_ia/features/dashboard/presentation/cubit/dashboard_cubit.dart';
+import 'package:test_ia/features/dashboard/presentation/widgets/edit_char_dialog.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -115,8 +116,36 @@ class _DashboardPageState extends State<DashboardPage> {
                             setState(() => _isLoadingMore = true),
                         success: (value) => setState(() {
                           _isLoadingMore = false;
-                          _items.addAll(value.pageItem);
+                          if (value.pageItem.isNotEmpty) {
+                            _items.addAll(value.pageItem);
+                          }
                         }),
+                        successUpdate: (value) {
+                          setState(() {
+                            _isLoadingMore = false;
+                            int index = _items.indexWhere(
+                              (item) => item.id == value.char.id,
+                            );
+                            _items[index] = value.char;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Item ID: ${value.char.id} updated',
+                              ),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        },
+                        successDelete: (value) {
+                          setState(() => _isLoadingMore = false);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Item ID: ${value.id} deleted'),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        },
                         error: (value) {
                           setState(() => _isLoadingMore = false);
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -165,15 +194,10 @@ class _DashboardPageState extends State<DashboardPage> {
                                 key: Key(itemText),
                                 direction: DismissDirection.endToStart,
                                 onDismissed: (direction) {
-                                  //TODO
-                                  setState(() {
-                                    _items.removeAt(index);
-                                  });
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('$itemText deleted'),
-                                      duration: const Duration(seconds: 2),
-                                    ),
+                                  //delete item from ui and local storage
+                                  _items.removeAt(index);
+                                  GetIt.I<DashboardCubit>().deleteCharacter(
+                                    _items[index],
                                   );
                                 },
                                 background: Container(
@@ -223,16 +247,17 @@ class _DashboardPageState extends State<DashboardPage> {
                                         Icons.edit,
                                         color: Color(0xFF8E24AA),
                                       ),
-                                      onPressed: () {
-                                        // Handle edit action
-                                        ScaffoldMessenger.of(
-                                          context,
-                                        ).showSnackBar(
-                                          SnackBar(
-                                            content: Text('Editing $itemText'),
-                                          ),
-                                        );
-                                      },
+                                      onPressed: () => EditCharDialog.show(
+                                        context,
+                                        currentText: _items[index].name ?? '',
+                                        onSave: (text) =>
+                                            GetIt.I<DashboardCubit>()
+                                                .updateCharacter(
+                                                  _items[index].copyWith(
+                                                    name: text,
+                                                  ),
+                                                ),
+                                      ),
                                     ),
                                   ),
                                 ),
