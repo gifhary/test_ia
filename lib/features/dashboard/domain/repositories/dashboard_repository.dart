@@ -14,4 +14,6 @@ abstract class DashboardRepository {
   Future<Either<AppException, Unit>> putCharactersLocally(
     List<RickAndMortyCharacter> characters,
   );
+
+  Future<Either<AppException, Unit>> logout();
 }

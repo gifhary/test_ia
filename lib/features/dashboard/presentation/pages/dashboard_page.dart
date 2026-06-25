@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import 'package:test_ia/core/route/route_config.dart';
 import 'package:test_ia/core/theme/pallet.dart';
 import 'package:test_ia/features/dashboard/data/models/rick_and_morty_character.dart';
 import 'package:test_ia/features/dashboard/presentation/cubit/dashboard_cubit.dart';
@@ -88,10 +90,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           size: 28,
                         ),
                         tooltip: 'Logout',
-                        onPressed: () {
-                          // Pop back to Login Screen
-                          Navigator.of(context).pop();
-                        },
+                        onPressed: () => GetIt.I<DashboardCubit>().logout(),
                       ),
                       const SizedBox(width: 8),
                       const Text(
@@ -120,6 +119,18 @@ class _DashboardPageState extends State<DashboardPage> {
                             _items.addAll(value.pageItem);
                           }
                         }),
+                        successLogout: (val) {
+                          setState(() {
+                            _isLoadingMore = false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Logged out'),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                          context.go(RouteConfig.login);
+                        },
                         successUpdate: (value) {
                           setState(() {
                             _isLoadingMore = false;
@@ -130,9 +141,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           });
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(
-                                'Item ID: ${value.char.id} updated',
-                              ),
+                              content: Text('Item updated'),
                               duration: const Duration(seconds: 2),
                             ),
                           );
@@ -141,7 +150,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           setState(() => _isLoadingMore = false);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text('Item ID: ${value.id} deleted'),
+                              content: Text('Item deleted'),
                               duration: const Duration(seconds: 2),
                             ),
                           );

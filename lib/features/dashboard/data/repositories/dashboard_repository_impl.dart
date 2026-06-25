@@ -82,4 +82,19 @@ class DashboardRepositoryImpl implements DashboardRepository {
       return Left(e);
     }
   }
+
+  @override
+  Future<Either<AppException, Unit>> logout() async {
+    try {
+      await localDataSource.logout();
+
+      return Right(unit);
+    } on InternetConnectionException catch (e) {
+      return Left(e);
+    } on ServerException catch (e) {
+      return Left(e);
+    } on DefaultAppException catch (e) {
+      return Left(e);
+    }
+  }
 }

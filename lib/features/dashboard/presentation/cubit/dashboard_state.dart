@@ -9,6 +9,7 @@ class DashboardState with _$DashboardState {
   }) = DashboardSuccess;
   const factory DashboardState.successDelete({required int id}) =
       DashboardSuccessDelete;
+  const factory DashboardState.successLogout() = DashboardSuccessLogout;
   const factory DashboardState.successUpdate({
     required RickAndMortyCharacter char,
   }) = DashboardSuccessUpdate;
