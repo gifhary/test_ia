@@ -55,11 +55,11 @@ class _SplashPageState extends State<SplashPage>
         listener: (context, state) {
           state.mapOrNull(
             success: (value) => Timer(
-              const Duration(seconds: 2),
+              const Duration(milliseconds: 1500),
               () => context.go(RouteConfig.dashboard),
             ),
             error: (value) => Timer(
-              const Duration(seconds: 2),
+              const Duration(milliseconds: 1500),
               () => context.go(RouteConfig.login),
             ),
           );

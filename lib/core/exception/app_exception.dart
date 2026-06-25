@@ -37,6 +37,7 @@ class InternetConnectionException extends AppException {
     super.message = 'No internet connection',
     super.code = ExceptionCode.internetConnectionException,
     super.data,
+    String? errorMessage,
   });
 }
 

@@ -6,4 +6,6 @@ part 'env.g.dart';
 abstract class Env {
   @EnviedField(obfuscate: false, varName: 'SHOW_DEBUG_INFO')
   static bool showDebugInfo = _Env.showDebugInfo;
+  @EnviedField(obfuscate: true, varName: 'API_ENDPOINT')
+  static String apiEndpoint = _Env.apiEndpoint;
 }

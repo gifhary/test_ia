@@ -12,7 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
   dartz: ^0.10.1
-  dio: ^5.9.0
   envied: ^1.2.0
   flutter_bloc: ^9.1.1
   flutter_localizations:
@@ -27,6 +26,8 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
   flutter_secure_storage: ^10.3.1
+  dio: ^5.9.2
+  connectivity_plus: ^7.1.1
 
 dev_dependencies:
   flutter_test:
